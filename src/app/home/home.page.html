@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="text-title text-2xl" color="primary">Reyy Gas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="mx-5">
+    <!-- Icon -->
+    <div class="w-full flex items-center justify-center my-8">
+      <img class="w-10 h-10" src="../../assets/images/botella-con-gas.png" class="gas-icon" alt="Gas Icon">
+    </div>
+
+    <!-- Precios de Gas -->
+    <div class="flex flex-col gap-4">
+      <!-- Precio de Gas LP Kg-->
+      <div class="rounded px-4 py-7 flex items-center justify-between background1">
+        <div class="flex gap-3 items-center">
+          <div class="rounded-full bg-slate-900 border-2 border-white text-white flex items-center justify-center p-3">
+            <ion-icon class="w-6 h-6" aria-hidden="true" name="scale-outline"></ion-icon>
+          </div>
+          <div class="text-white">
+            <h3 class="font-bold">Precio p/ Kg</h3>
+            <p class="text-sm opacity-75">Hoy</p>
+          </div>
+        </div>
+
+        <!-- Precio -->
+        <div>
+          <h2 class="text-white font-bold text-3xl">$1,234.00</h2>
+        </div>
+      </div>
+
+      <!-- Precio de Gas LP Litro-->
+      <div class="rounded px-4 py-7 flex items-center justify-between background2">
+        <div class="flex gap-3 items-center">
+          <div class="rounded-full bg-slate-900 border-2 border-white text-white flex items-center justify-center p-3">
+            <ion-icon class="w-6 h-6" aria-hidden="true" name="water-outline"></ion-icon>
+          </div>
+          <div class="text-white">
+            <h3 class="font-bold">Precio p/ Litro</h3>
+            <p class="text-sm opacity-75">Hoy</p>
+          </div>
+        </div>
+
+        <!-- Precio -->
+        <div>
+          <h2 class="text-white font-bold text-3xl">$1,234.00</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Realiza un pedido -->
+    <div class="mt-12">
+      <h2 class="text-slate-900 text-xl font-semibold">Realiza un pedido</h2>
+      <ion-list>
+        <ion-item lines="none" *ngFor="let user of users" class="space-y-10">
+          <ion-avatar slot="start" class="bg-blue-600 flex items-center justify-center text-sm text-white font-medium">
+            {{ user.nombre.charAt(0)}}{{ user.apellido.charAt(0)}}
+          </ion-avatar>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">{{ user.telefono }}</h3>
+            <p class="text-sm text-slate-500">{{ user.nombre }}
+              {{ user.apellido }}
+            </p>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+
+</ion-content>
