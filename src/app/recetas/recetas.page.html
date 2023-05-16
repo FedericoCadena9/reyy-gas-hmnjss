@@ -1,0 +1,13 @@
+<ion-content>
+  <div class="mt-20">
+
+    <div>
+      <h2>Categorias</h2>
+      <ion-list>
+        <ion-item *ngFor="let category of recipesCategories.categories">
+          <ion-label>{{category.strCategory}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

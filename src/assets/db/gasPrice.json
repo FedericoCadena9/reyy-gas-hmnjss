@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": "gasKg",
+      "nombre": "Gas (kg)",
+      "fecha": "2015-01-01",
+      "precio": 450
+    },
+    {
+      "id": "gasLt",
+      "nombre": "Gas (lt)",
+      "fecha": "2015-01-01",
+      "precio": 250.5
+    }
+  ]
+}

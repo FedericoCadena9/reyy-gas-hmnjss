@@ -1,34 +1,62 @@
 import { Component, OnInit } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { ClientService } from '../services/client.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-@Injectable({
-  providedIn: 'root',
-})
-export class HomePage implements OnInit {
-  
-  users: any = [];
 
-  constructor(private http: HttpClient) {}
+export class HomePage implements OnInit {
+  operatorNumbers: any = [];
+  gasPrice: any = [];
+  colors: any = [
+    'red',
+    'orange',
+    'amber',
+    'yellow',
+    'lime',
+    'green',
+    'emerald',
+    'teal',
+    'cyan',
+    'sky',
+    'blue',
+    'indigo',
+    'violet',
+    'purple',
+    'fuchsia',
+    'pink',
+    'rose',
+  ];
+
+  constructor(
+    private clientService: ClientService
+  ) {}
 
   ngOnInit() {
-    this.getData().subscribe(res => {
+    this.clientService.getPhoneNumbers().subscribe((res) => {
       console.log(res);
-      this.users = res;
+      this.operatorNumbers = res;
+
+      //Crear colores aleatorios para los operadores
+      for (const user of this.operatorNumbers) {
+        user.colors =
+          'bg-' + this.colors[Math.floor(Math.random() * 17)] + '-500';
+      }
+    });
+
+    this.clientService.getGasPrices().subscribe((res) => {
+      console.log(res);
+      this.gasPrice = res;
     });
   }
 
-  getData() {
-    return this.http.get('assets/db/numbers.json').pipe(
-      map((res: any) => {
-        return res.data;
-      })
-    );
+  // Función para obtener los colores de los operadores
+  getUserClasses(user: any) {
+    return {
+      [user.colors]: true,
+    };
   }
 }

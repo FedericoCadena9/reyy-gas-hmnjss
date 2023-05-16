@@ -34,3 +34,11 @@
 .text-title {
   font-family: "Lobster", cursive;
 }
+
+.nav-icon {
+  @apply p-2 flex items-center justify-center rounded-full;
+}
+
+.btn-primary {
+  @apply bg-pink-500 text-white font-medium rounded-md px-6 py-3 transition hover:bg-pink-600;
+}
