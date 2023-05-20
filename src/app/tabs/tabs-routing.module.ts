@@ -28,10 +28,18 @@ const routes: Routes = [
           import('../recetas/recetas.module').then((m) => m.RecetasPageModule),
       },
       {
+        path: 'social-media',
+        loadChildren: () => import('../social-media/social-media.module').then( m => m.SocialMediaPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full',
       },
+      {
+        path: 'about-us',
+        loadChildren: () => import('../about-us/about-us.module').then( m => m.AboutUsPageModule)
+      }
     ],
   },
   {
