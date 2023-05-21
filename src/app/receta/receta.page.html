@@ -1,0 +1,102 @@
+<ion-content>
+  <div class="mt-20 mx-4">
+    <ion-buttons>
+      <ion-back-button defaultHref="tabs/recetas">
+      </ion-back-button>
+    </ion-buttons>
+
+    <!-- Loader Skeleton -->
+    <ion-list *ngIf="!loaded">
+      <ion-thumbnail class="w-full h-64" slot="start">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-thumbnail>
+
+      <div class="my-2 flex items-center gap-2">
+        <ng-container *ngFor="let item of [1, 2, 3, 4]">
+          <ion-skeleton-text [animated]="true" class="w-full h-16"></ion-skeleton-text>
+        </ng-container>
+      </div>
+
+      <div class="my-6">
+        <h2>
+          <ion-skeleton-text [animated]="true" class="w-64 h-6"></ion-skeleton-text>
+        </h2>
+        <p class="mt-2">
+          <ion-skeleton-text [animated]="true" class="w-40 h-6"></ion-skeleton-text>
+        </p>
+        <div class="mt-6">
+          <ng-container *ngFor="let item of [1, 2, 3, 4]">
+            <p>
+              <ion-skeleton-text [animated]="true" class="w-full h-4"></ion-skeleton-text>
+            </p>
+          </ng-container>
+        </div>
+      </div>
+    </ion-list>
+
+    <!-- Receta -->
+    <div *ngIf="loaded && recipe">
+
+
+      <!-- Galeria -->
+      <div>
+        <img class="w-full h-64 object-cover border border-slate-200 rounded"
+          src="{{recipe.attributes.imagenes?.data[0]?.attributes.formats.thumbnail.url}}" alt="">
+
+        <div class="flex items-center gap-3">
+          <ng-container *ngFor="let imagen of recipe.attributes.imagenes?.data.slice(1)">
+            <div class="mt-2">
+              <ion-img-viewer class="w-full h-full object-cover border border-slate-200 rounded"
+                src="{{imagen?.attributes.formats.thumbnail.url}}" title="{{recipe.attributes?.nombre}}" scheme="dark">
+              </ion-img-viewer>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Titulo y Dificultad -->
+      <div class="my-6">
+        <h1 class="subtitle-text">{{recipe.attributes?.nombre}}</h1>
+        <div class="flex items-center gap-2">
+          <p class="text-slate-700 font-medium">Dificultad:</p>
+          <span
+            class="bg-green-200 text-green-600 text-xs rounded-md px-2 py-1">{{recipe.attributes?.dificultad}}</span>
+        </div>
+      </div>
+
+      <!-- Descripcion -->
+      <div>
+        <h2 class="subtitle-text">Descripción</h2>
+        <p class="mt-2 text-slate-700">
+          {{recipe.attributes?.descripcion}}
+        </p>
+      </div>
+
+      <!-- Ingredientes -->
+      <div class="my-6">
+        <div class="flex items-center gap-3">
+          <h2 class="subtitle-text">Ingredientes</h2>
+          <span class="text-pink-500 text-sm">
+
+          </span>
+        </div>
+        <div class="mt-2">
+          <p class="text-slate-800">
+            {{recipe.attributes?.ingredientes}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="flex px-5 py-2 gap-2">
+      <div class="w-14 flex items-center justify-center h-full border-2 border-slate-300 p-4 rounded-md">
+        <ion-icon class="w-6 h-6" name="heart-outline"></ion-icon>
+      </div>
+      <button class="btn-primary flex-1">Empezar a cocinar</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

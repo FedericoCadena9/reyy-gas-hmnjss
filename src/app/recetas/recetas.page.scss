@@ -1,0 +1,25 @@
+ion-segment-button {
+  background: #f1f5f9;
+  color: #64748b;
+  border-radius: 999px;
+  border-width: 1px;
+  border-color: #cbd5e1;
+}
+
+ion-segment-button::part(indicator-background) {
+  background: #fbcfe8;
+  color: #ec4899;
+  border-width: 1px !important;
+  border-color: #ec4899 !important;
+  border-radius: 999px;
+  --border-color: #ec4899;
+}
+
+.segment-button-checked.ios::part(native) {
+  background: #fbcfe8;
+  color: #ec4899;
+  border-width: 1px !important;
+  border-color: #ec4899 !important;
+  border-radius: 999px;
+  --border-color: #ec4899;
+}
