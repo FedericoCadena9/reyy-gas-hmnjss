@@ -1,0 +1,56 @@
+<ion-content>
+  <ion-slides pager="true">
+
+    <!-- Slide 1 -->
+    <ion-slide>
+      <ion-text class="flex flex-col items-start h-full">
+        <img class="w-full h-64"
+          src="https://images.unsplash.com/photo-1622308023558-2130696ec5cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+          alt="">
+
+        <div class="px-5 w-full mt-16 space-y-6">
+          <h1 class="text-xl font-semibold text-slate-800 text-center mx-5">Gas LP: seguro y limpio. Pide tu tanque con
+            nuestra app desde casa u oficina.</h1>
+          <div (click)="next()" class="btn-secondary w-full">Siguiente</div>
+        </div>
+
+      </ion-text>
+    </ion-slide>
+
+    <!-- Slide 2 -->
+    <ion-slide>
+      <ion-text class="flex flex-col items-start h-full">
+        <img class="w-full h-64"
+          src="https://images.unsplash.com/photo-1539186607619-df476afe6ff1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+          alt="">
+
+
+        <div class="px-5 w-full mt-16 space-y-6">
+          <h1 class="text-xl font-semibold text-slate-800 text-center mx-5">Almacenamos Gas LP en tanques a alta
+            presión. Obtén un tanque nuevo o recarga el tuyo.</h1>
+          <div (click)="next()" class="btn-secondary w-full">Siguiente</div>
+        </div>
+      </ion-text>
+    </ion-slide>
+
+    <!-- Slide 3 -->
+    <ion-slide>
+      <ion-text class="flex flex-col items-start h-full">
+        <img class="w-full h-64"
+          src="https://images.unsplash.com/photo-1511973774220-37fab967aba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+          alt="">
+
+        <div class="px-5 w-full mt-16 space-y-6">
+          <h1 class="text-xl font-semibold text-slate-800 text-center mx-5">Con nuestra app. Ahorra dinero y evita
+            desperdicios.</h1>
+          <div (click)="start()" class="btn-primary w-full">Iniciar Sesión</div>
+
+          <p class="mb-14 mt-4 text-sm text-slate-700"> ¿Aún no tienes una cuenta?
+            <a [routerLink]="['/register']" class="text-blue-500 underline">Registrate aquí</a>
+          </p>
+        </div>
+      </ion-text>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>
