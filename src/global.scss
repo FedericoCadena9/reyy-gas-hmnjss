@@ -31,6 +31,12 @@
 // @import "~@ionic/angular/css/text-transformation.css";
 // @import "~@ionic/angular/css/flex-utils.css";
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 .text-title {
   font-family: "Lobster", cursive;
 }
@@ -41,4 +47,16 @@
 
 .btn-primary {
   @apply bg-pink-500 text-white font-medium rounded-md px-6 py-3 transition hover:bg-pink-600;
+}
+
+.btn-secondary {
+  @apply border-2 border-purple-700 text-purple-700 font-medium rounded-md px-6 py-3 transition hover:bg-purple-700 hover:text-white;
+}
+
+.span-error {
+  @apply text-red-600 text-xs mt-2 inline-block;
+}
+
+.subtitle-text {
+  @apply text-xl font-semibold text-slate-800;
 }

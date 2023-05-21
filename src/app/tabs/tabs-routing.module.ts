@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -28,16 +28,16 @@ const routes: Routes = [
           import('../recetas/recetas.module').then((m) => m.RecetasPageModule),
       },
       {
+        path: 'receta/:id',
+        loadChildren: () =>
+          import('../receta/receta.module').then((m) => m.RecetaPageModule),
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full',
       },
     ],
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full',
   },
 ];
 
