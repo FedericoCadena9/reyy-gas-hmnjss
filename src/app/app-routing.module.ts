@@ -59,6 +59,10 @@ const routes: Routes = [
       import('./receta/receta.module').then((m) => m.RecetaPageModule),
   },
   {
+    path: 'about-us',
+    loadChildren: () => import('./about-us/about-us.module').then( m => m.AboutUsPageModule)
+  },
+  {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full',

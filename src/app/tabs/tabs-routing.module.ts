@@ -33,10 +33,18 @@ const routes: Routes = [
           import('../receta/receta.module').then((m) => m.RecetaPageModule),
       },
       {
+        path: 'social-media',
+        loadChildren: () => import('../social-media/social-media.module').then( m => m.SocialMediaPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full',
       },
+      {
+        path: 'about-us',
+        loadChildren: () => import('../about-us/about-us.module').then( m => m.AboutUsPageModule)
+      }
     ],
   },
 ];
