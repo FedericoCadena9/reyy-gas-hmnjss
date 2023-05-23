@@ -1,5 +1,10 @@
 <ion-content>
+
   <div class="mx-4 my-8">
+    <ion-buttons>
+      <ion-back-button defaultHref="/login">
+      </ion-back-button>
+    </ion-buttons>
     <h1 class="text-pink-500 uppercase font-medium text-sm text-center">Crear cuenta</h1>
 
     <p class="text-center font-semibold mt-6 text-slate-900 text-sm">¡Felicidades! ¡Ya estás a un paso de disfrutar de
@@ -49,9 +54,11 @@
       </div>
 
       <div class="mb-8">
-        <ion-input type="password" placeholder="Contraseña"
-          class="bg-white border border-slate-200 placeholder-slate-400 rounded-md" formControlName="password">
-        </ion-input>
+        <div  class="relative">
+          <ion-input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Contraseña" formControlName="password"
+            class="bg-white border border-slate-200 placeholder-slate-400 rounded-md w-full"></ion-input>
+          <ion-icon class="absolute right-0 top-1.5 my-2 mx-3 z-10 w-5 h-5 text-slate-500" name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end" (click)="togglePasswordVisibility()"></ion-icon>
+        </div>
         <span class="text-xs text-slate-400">
           La contraseña debe tener al menos 8 caracteres.
         </span>

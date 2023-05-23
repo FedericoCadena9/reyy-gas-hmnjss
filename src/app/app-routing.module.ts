@@ -67,6 +67,38 @@ const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full',
   },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
+    path: 'email-sent',
+    loadChildren: () => import('./email-sent/email-sent.module').then( m => m.EmailSentPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'phone-numbers',
+    loadChildren: () => import('./phone-numbers/phone-numbers.module').then( m => m.PhoneNumbersPageModule)
+  },
+  {
+    path: 'ecommerce',
+    loadChildren: () => import('./ecommerce/ecommerce.module').then( m => m.EcommercePageModule)
+  },
+  {
+    path: 'centro-fugas',
+    loadChildren: () => import('./centro-fugas/centro-fugas.module').then( m => m.CentroFugasPageModule)
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then( m => m.OrdersPageModule)
+  },
 ];
 @NgModule({
   imports: [

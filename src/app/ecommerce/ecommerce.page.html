@@ -1,0 +1,33 @@
+<ion-content>
+  <div class="mx-5 relative">
+    <!-- Searchbar -->
+    <div class="bg-white top-0 fixed px-4 py-2 left-0 w-full z-20">
+      <ion-searchbar placeholder="Buscar producto" mode="ios" (ionChange)="search($event)"></ion-searchbar>
+    </div>
+
+    <!-- Productos -->
+    <div class="grid grid-cols-2 gap-3 mb-12 mt-24">
+      <ion-card mode="ios" class="m-0 border border-slate-300 relative" [routerLink]="['/tabs/product/' + product.id]"
+        *ngFor="let product of products | filter:textSearch: 'nombre'">
+        <img alt="Silhouette of mountains" class="h-24 object-cover w-full"
+          src="https://images.unsplash.com/photo-1682687221073-53ad74c2cad7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60" />
+        <ion-card-header class="p-2">
+          <ion-card-title class="text-xs text-slate-800">{{product.attributes.nombre}}</ion-card-title>
+        </ion-card-header>
+
+        <div class="px-2 pb-3 -mt-2 bottom-0">
+          <ion-card-content class="text-xs p-0 m-0 line-clamp-2">
+            {{product.attributes.descripcion}}
+          </ion-card-content>
+          <span class="text-lg mt-2 text-orange-500 font-bold">{{product.attributes.precio | currency}}</span>
+        </div>
+      </ion-card>
+    </div>
+
+    <!-- Mostrar SVG si no hay resultados -->
+    <div class="h-96" *ngIf="(products | filter:textSearch: 'nombre')?.length === 0">
+      <img class="mx-auto" src="../../assets/images/No Results.svg" alt="Sin resultados">
+      <p class="text-center mt-4 text-slate-500">No se encontraron resultados.</p>
+    </div>
+  </div>
+</ion-content>

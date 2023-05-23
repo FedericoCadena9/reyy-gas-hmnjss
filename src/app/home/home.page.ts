@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../services/client.service';
-
+import { Preferences } from '@capacitor/preferences';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-
 export class HomePage implements OnInit {
-  operatorNumbers: any = [];
+  operadores: any = [];
   gasPrice: any = [];
+  userToken: any;
+
   colors: any = [
     'red',
     'orange',
@@ -31,26 +33,14 @@ export class HomePage implements OnInit {
     'rose',
   ];
 
-  constructor(
-    private clientService: ClientService
-  ) {}
+  constructor(private clientService: ClientService, private router: Router) {}
 
-  ngOnInit() {
-    this.clientService.getPhoneNumbers().subscribe((res) => {
-      console.log(res);
-      this.operatorNumbers = res;
+  async ngOnInit() {
+    const user = await Preferences.get({ key: 'auth-token' });
+    this.userToken = user.value;
 
-      //Crear colores aleatorios para los operadores
-      for (const user of this.operatorNumbers) {
-        user.colors =
-          'bg-' + this.colors[Math.floor(Math.random() * 17)] + '-500';
-      }
-    });
-
-    this.clientService.getGasPrices().subscribe((res) => {
-      console.log(res);
-      this.gasPrice = res;
-    });
+    this.getGasPrice(this.userToken);
+    this.getOperadores(this.userToken);
   }
 
   // Función para obtener los colores de los operadores
@@ -58,5 +48,30 @@ export class HomePage implements OnInit {
     return {
       [user.colors]: true,
     };
+  }
+
+  // Función para obtener el precio de Gas
+  getGasPrice(token: string) {
+    this.clientService.getGasPrices(token).subscribe((res) => {
+      console.log(res.data);
+      this.gasPrice = res.data;
+    });
+  }
+
+  // Función para obtener los operadores
+  getOperadores(token: string) {
+    this.clientService.getOperadores(token).subscribe((res) => {
+      this.operadores = res.data;
+
+      //Crear colores aleatorios para los operadores
+      for (const user of this.operadores) {
+        user.colors =
+          'bg-' + this.colors[Math.floor(Math.random() * 17)] + '-500';
+      }
+    });
+  }
+
+  goToOrders() {
+    this.router.navigate(['/tabs/orders']);
   }
 }

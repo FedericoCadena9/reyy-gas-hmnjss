@@ -10,7 +10,7 @@ import { ClientService } from '../services/client.service';
 export class TipPage implements OnInit {
   tipId: any;
   tip: any;
-  public loaded = false;
+  public loaded: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,

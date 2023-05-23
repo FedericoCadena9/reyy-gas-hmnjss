@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../services/client.service';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-recetas',
@@ -9,29 +8,33 @@ import { UserService } from '../services/user.service';
 })
 export class RecetasPage implements OnInit {
   recipesCategories: any = [];
+  favoriteRecipes: any = [];
   recipes: any = [];
   textSearch: string = '';
   selectedCategory: string = 'Todos';
 
-  user = {
-    identifier: 'Jair Lara',
-    password: 'qwerty12345',
-  };
-
-  jwt: string = '';
-
-  constructor(
-    private clientService: ClientService,
-    private userService: UserService
-  ) {}
+  constructor(private clientService: ClientService) {
+    this.favoriteRecipes = JSON.parse(
+      localStorage.getItem('favoriteRecipes') || '[]'
+    );
+  }
 
   ngOnInit() {
-    this.userService
-      .jwtUser(this.user.identifier, this.user.password)
-      .subscribe((jwt: string) => {
-        this.jwt = jwt;
-      });
+    this.getRecipesCategories();
+  }
 
+  ionViewWillEnter() {
+    // Actualizar los favoritos del LocalStorage
+    this.favoriteRecipes = JSON.parse(
+      localStorage.getItem('favoriteRecipes') || '[]'
+    );
+
+    // Cargar la lista actualizada de recetas favoritas
+    this.getRecipes();
+  }
+
+  // Función para obtener las categorías de las recetas
+  getRecipesCategories() {
     this.clientService.getRecipesCategories().subscribe((res) => {
       this.recipesCategories = res;
 
@@ -43,7 +46,10 @@ export class RecetasPage implements OnInit {
         },
       });
     });
+  }
 
+  // Función para obtener las recetas
+  getRecipes() {
     this.clientService.getRecipes(this.selectedCategory).subscribe((res) => {
       this.recipes = res;
     });

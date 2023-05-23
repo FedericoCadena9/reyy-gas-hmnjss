@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
+  showPassword: boolean = false;
+  msgError: string;
+  isLoading = false;
   isSubmitted = false;
 
   constructor(
@@ -28,21 +31,33 @@ export class LoginPage implements OnInit {
     });
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
   get errorControl() {
     return this.loginForm.controls;
   }
 
   loginUser() {
+    this.isSubmitted = true;
     if (!this.loginForm.valid) {
       console.log('Please provide all the required values!');
       return false;
     } else {
-      this.isSubmitted = true;
-
-      this.authService.loginUser(this.loginForm.value).subscribe((res) => {
-        this.router.navigateByUrl('/tabs', { replaceUrl: true });
-        this.isSubmitted = false;
-      });
+      this.isLoading = true;
+      this.authService.loginUser(this.loginForm.value).subscribe(
+        (res) => {
+          this.router.navigateByUrl('/tabs', { replaceUrl: true });
+          this.isLoading = false;
+        },
+        (error) => {
+          this.isLoading = false;
+          console.log('Error en el inicio de sesión:', error);
+          this.msgError =
+            'Correo electrónico o contraseña incorrectos. Por favor, inténtelo de nuevo.';
+        }
+      );
     }
   }
 }

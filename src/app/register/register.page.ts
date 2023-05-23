@@ -45,7 +45,6 @@ export class RegisterPage implements OnInit {
   }
 
   onSumbit() {
-
     if (!this.signUpForm.valid) {
       console.log('Please provide all the required values!');
       return false;

@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="mt-6 mx-4">
+    <ion-buttons>
+      <ion-back-button defaultHref="/forgot-password">
+      </ion-back-button>
+    </ion-buttons>
+
+    <div class="flex items-center justify-center">
+      <div class="flex items-center justify-center bg-pink-100 text-pink-500 p-4 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+          <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
+        </svg>
+
+      </div>
+    </div>
+
+    <div class="text-center">
+      <h1 class="subtitle-text mt-4">Correo Enviado</h1>
+      <p class="text-slate-600 text-sm mt-2">
+        Se ha enviado un correo electrónico a <span class="font-semibold">{{ email }}</span> con instrucciones para
+        restablecer la contraseña.
+      </p>
+    </div>
+
+    <div class="text-center mt-6 flex flex-col items-center">
+      <p class="text-sm text-slate-500">
+        ¿No recibió el correo electrónico?
+        <a class="text-pink-500 font-medium" (click)="onResendEmail(true)">
+          Reenviar correo
+        </a>
+      </p>
+
+      <span class="mt-6 px-8 py-2 rounded-md text-blue-500 bg-blue-100 font-medium text-xs" *ngIf="msg">{{ msg }}</span>
+
+        <p class="text-purple-500 flex items-center gap-2 font-medium mt-12 text-sm" [routerLink]="['/login']">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd"
+              d="M11.03 3.97a.75.75 0 010 1.06l-6.22 6.22H21a.75.75 0 010 1.5H4.81l6.22 6.22a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z"
+              clip-rule="evenodd" />
+          </svg>
+          <span>
+            Volver a Iniciar Sesión
+          </span>
+        </p>
+    </div>
+  </div>
+
+</ion-content>

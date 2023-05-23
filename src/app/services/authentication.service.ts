@@ -64,6 +64,21 @@ export class AuthenticationService {
       );
   }
 
+  //Función para eliminar un usuario
+  deleteUser(id: string, token: string) {
+    return this.http
+      .delete(`${environment.api_url}/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .pipe(
+        tap((_) => {
+          this.logout();
+        })
+      );
+  }
+
   //Función para cerrar sesión
   logout() {
     this.isAuthenticated.next(false);

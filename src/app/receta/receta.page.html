@@ -1,5 +1,5 @@
 <ion-content>
-  <div class="mt-20 mx-4">
+  <div class="mx-4">
     <ion-buttons>
       <ion-back-button defaultHref="tabs/recetas">
       </ion-back-button>
@@ -86,6 +86,22 @@
           </p>
         </div>
       </div>
+
+      <!-- Pasos -->
+      <div class="my-6" *ngIf="showSteps">
+        <div class="flex items-center gap-3">
+          <h2 class="subtitle-text">Pasos</h2>
+          <span class="text-pink-500 text-sm">
+
+          </span>
+        </div>
+        <div class="mt-2">
+          <p class="text-slate-800">
+            {{recipe.attributes?.pasos}}
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 </ion-content>
@@ -93,10 +109,12 @@
 <ion-footer>
   <ion-toolbar>
     <div class="flex px-5 py-2 gap-2">
-      <div class="w-14 flex items-center justify-center h-full border-2 border-slate-300 p-4 rounded-md">
-        <ion-icon class="w-6 h-6" name="heart-outline"></ion-icon>
+      <div class="w-14 flex items-center justify-center h-full border-2 border-slate-300 p-4 rounded-md"
+        [ngClass]="{ 'bg-red-600 text-white border-none': buttonState }">
+        <ion-icon class="w-6 h-6" name="{{ buttonState ? 'heart' : 'heart-outline' }}"
+          (click)="addFavoriteRecipe()"></ion-icon>
       </div>
-      <button class="btn-primary flex-1">Empezar a cocinar</button>
+      <button class="btn-primary flex-1" (click)="shareSteps()">Empezar a cocinar</button>
     </div>
   </ion-toolbar>
 </ion-footer>

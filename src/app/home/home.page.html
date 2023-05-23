@@ -1,5 +1,5 @@
 <ion-content>
-  <div class="mt-20">
+  <div>
     <!-- Icon -->
     <div class="w-full flex items-center justify-center my-8">
       <img class="w-10 h-10" src="../../assets/images/botella-con-gas.png" class="gas-icon" alt="Gas Icon">
@@ -7,50 +7,82 @@
 
     <!-- Precios de Gas -->
     <ion-list class="flex flex-col gap-4">
-      <ion-item lines="none" *ngFor="let price of gasPrice" class="m-0 p-0">
+      <ion-item lines="none" class="m-0 p-0">
         <div class="rounded px-4 py-7 flex items-center justify-between w-full"
-          [ngClass]="{ 'background1': price.id === 'gasKg', 'background2': price.id !== 'gasKg' }">
+          [ngClass]="{ 'background1': gasPrice.attributes?.precioKg !== null }">
           <div class="flex gap-3 items-center">
             <div
               class="rounded-full bg-slate-900 border-2 border-white text-white flex items-center justify-center p-2">
               <ion-icon class="w-5 h-5" aria-hidden="true"
-                [name]="price.id === 'gasKg' ? 'scale-outline' : 'water-outline'"></ion-icon>
+                [name]="gasPrice.id === 'gasKg' ? 'scale-outline' : 'water-outline'"></ion-icon>
             </div>
             <div class="text-white">
-              <h3 class="font-bold">{{ price.nombre }}</h3>
-              <p class="text-sm opacity-75">{{ price.fecha }}</p>
+              <h3 class="font-bold">Precio Kg</h3>
             </div>
           </div>
 
           <!-- Precio -->
           <div>
             <h2 class="text-white font-bold text-2xl">
-              {{ price.precio | currency:'MXN':'symbol':'1.2-2' }}
+              {{ gasPrice.attributes?.precioKg | currency:'MXN':'symbol':'1.2-2' }}
+            </h2>
+          </div>
+        </div>
+      </ion-item>
+      <ion-item lines="none" class="m-0 p-0">
+        <div class="rounded px-4 py-7 flex items-center justify-between w-full"
+          [ngClass]="{ 'background2': gasPrice.attributes?.precioLt !== null }">
+          <div class="flex gap-3 items-center">
+            <div
+              class="rounded-full bg-slate-900 border-2 border-white text-white flex items-center justify-center p-2">
+              <ion-icon class="w-5 h-5" aria-hidden="true"
+                [name]="gasPrice.id === 'gasKg' ? 'scale-outline' : 'water-outline'"></ion-icon>
+            </div>
+            <div class="text-white">
+              <h3 class="font-bold">Precio Lt</h3>
+            </div>
+          </div>
+
+          <!-- Precio -->
+          <div>
+            <h2 class="text-white font-bold text-2xl">
+              {{ gasPrice.attributes?.precioLt | currency:'MXN':'symbol':'1.2-2' }}
             </h2>
           </div>
         </div>
       </ion-item>
     </ion-list>
 
+    <div class="my-6 mx-5 rounded-md bg-emerald-500 text-white px-4 py-6 text-center">
+      <h2 class="text-semibold">Pide tu gas ahora y recíbelo en la puerta de tu casa. ¡Es fácil y rápido!</h2>
+      <button (click)="goToOrders()" class="text-slate-800 bg-white px-4 py-2 rounded-md font-semibold mt-6 w-full">
+        Haz tu pedido ahora
+      </button>
+    </div>
+
     <!-- Realiza un pedido -->
     <div class="mt-12">
       <h2 class="text-slate-900 text-xl font-semibold mx-5">Realiza un pedido</h2>
       <ion-list class="space-y-6 mt-5">
-        <ion-item lines="none" *ngFor="let user of operatorNumbers">
+        <ion-item lines="none" *ngFor="let user of operadores">
           <div class="flex items-center justify-between w-full">
             <div class="flex items-center gap-5">
-              <ion-avatar slot="start" class="flex items-center justify-center text-sm text-white font-medium w-10 h-10" [ngClass]="getUserClasses(user)">
-                {{ user.nombre.charAt(0)}}{{ user.apellido.charAt(0)}}
+              <ion-avatar slot="start" class="flex items-center justify-center text-sm text-white font-medium w-10 h-10"
+                [ngClass]="getUserClasses(user)">
+                {{ user.attributes.nombre.charAt(0)}}{{ user.attributes.apellido_paterno.charAt(0)}}
               </ion-avatar>
               <div>
-                <a [href]="'tel:' + user.telefono" class="text-lg font-bold text-slate-900">{{ user.telefono }}</a>
-                <p class="text-sm text-slate-500">{{ user.nombre }}
-                  {{ user.apellido }}
+                <a [href]="'tel:' + user.attributes.telefono" class="text-lg font-bold text-slate-900">{{
+                  user.attributes.telefono }}</a>
+                <p class="text-sm text-slate-500">{{ user.attributes.nombre }}
+                  {{ user.attributes.apellido_paterno }}
+                  {{ user.attributes.apellido_materno }}
+
                 </p>
               </div>
             </div>
 
-            <a [href]="'tel:' + user.telefono">
+            <a [href]="'tel:' + user.attributes.telefono">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                 class="w-5 h-5 text-slate-500">
                 <path fill-rule="evenodd"
@@ -62,7 +94,6 @@
         </ion-item>
       </ion-list>
     </div>
-
   </div>
 
 </ion-content>

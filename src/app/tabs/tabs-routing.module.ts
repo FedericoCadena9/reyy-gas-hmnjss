@@ -34,7 +34,10 @@ const routes: Routes = [
       },
       {
         path: 'social-media',
-        loadChildren: () => import('../social-media/social-media.module').then( m => m.SocialMediaPageModule)
+        loadChildren: () =>
+          import('../social-media/social-media.module').then(
+            (m) => m.SocialMediaPageModule
+          ),
       },
       {
         path: '',
@@ -43,8 +46,42 @@ const routes: Routes = [
       },
       {
         path: 'about-us',
-        loadChildren: () => import('../about-us/about-us.module').then( m => m.AboutUsPageModule)
-      }
+        loadChildren: () =>
+          import('../about-us/about-us.module').then(
+            (m) => m.AboutUsPageModule
+          ),
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('../profile/profile.module').then((m) => m.ProfilePageModule),
+      },
+      {
+        path: 'phone-numbers',
+        loadChildren: () =>
+          import('../phone-numbers/phone-numbers.module').then(
+            (m) => m.PhoneNumbersPageModule
+          ),
+      },
+      {
+        path: 'ecommerce',
+        loadChildren: () =>
+          import('../ecommerce/ecommerce.module').then(
+            (m) => m.EcommercePageModule
+          ),
+      },
+      {
+        path: 'centro-fugas',
+        loadChildren: () =>
+          import('../centro-fugas/centro-fugas.module').then(
+            (m) => m.CentroFugasPageModule
+          ),
+      },
+      {
+        path: 'orders',
+        loadChildren: () =>
+          import('../orders/orders.module').then((m) => m.OrdersPageModule),
+      },
     ],
   },
 ];

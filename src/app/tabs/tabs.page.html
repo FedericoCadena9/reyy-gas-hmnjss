@@ -4,14 +4,15 @@
       <div class="flex items-center px-3">
         <ion-title class="text-title text-2xl" color="primary">Reyy Gas</ion-title>
         <div class="flex gap-2">
-          <div class="bg-green-600 hover:bg-green-700 text-white nav-icon ">
+          <a class="bg-green-600 hover:bg-green-700 text-white nav-icon"
+            href="whatsapp://send?phone=+525559610472&text=Buen%20d%C3%ADa%2C%20me%20interesar%C3%ADa%20saber%20m%C3%A1s%20acerca%20del%20servicio%20de%20Reyy%20Gas">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path fill-rule="evenodd"
                 d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z"
                 clip-rule="evenodd" />
             </svg>
-          </div>
-          <div class="bg-slate-200 hover:bg-slate-300 text-slate-800 nav-icon">
+          </a>
+          <div class="bg-slate-200 hover:bg-slate-300 text-slate-800 nav-icon" (click)="goToProfile()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
               <path fill-rule="evenodd"
                 d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
@@ -29,7 +30,7 @@
             <ng-template>
               <ion-content>
                 <ion-list lines="none">
-                  <ion-item [button]="true" [detail]="false">
+                  <ion-item [button]="true" [detail]="false" (click)="goToAboutUs()">
                     <ion-label>
                       <p class="flex items-center gap-2 font-medium text-sm text-slate-600">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -52,7 +53,7 @@
                       </p>
                     </ion-label>
                   </ion-item>
-                  <ion-item [button]="true" [detail]="false">
+                  <ion-item [button]="true" [detail]="false" (click)="goToCentroDeFugas()">
                     <ion-label>
                       <p class="flex items-center gap-2 font-medium text-sm text-slate-600">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
@@ -103,9 +104,14 @@
       <ion-label>Recetas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab4">
+    <ion-tab-button tab="phone-numbers">
       <ion-icon aria-hidden="true" name="call"></ion-icon>
       <ion-label>Números</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="ecommerce">
+      <ion-icon aria-hidden="true" name="cart"></ion-icon>
+      <ion-label>Tienda</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

@@ -1,13 +1,13 @@
 <ion-content>
-  <div class="mt-20 mx-5 relative">
+  <div class="mx-5 relative">
     <!-- Searchbar -->
-    <div class="bg-white fixed top-12 px-4 py-2 left-0 w-full z-20">
+    <div class="bg-white top-0 fixed px-4 py-2 left-0 w-full z-20">
       <ion-searchbar placeholder="Buscar receta" mode="ios" (ionChange)="search($event)"></ion-searchbar>
     </div>
 
     <!-- Pro tip -->
     <div
-      class="flex justify-start items-start gap-4 border border-slate-200 bg-slate-100 rounded-md p-4 text-slate-500 text-sm mt-36">
+      class="flex justify-start items-start gap-4 border border-slate-200 bg-slate-100 rounded-md p-4 text-slate-500 text-sm mt-24">
       <div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 text-pink-500">
           <path fill-rule="evenodd"
@@ -18,13 +18,15 @@
 
       <div>
         <h3 class="text-lg font-semibold text-slate-800">Pro tip:</h3>
-        <p>Descubre cómo sacar el máximo provecho a tu tanque de gas con nuestros tips. ¡Te sorprenderás de lo fácil que
-          es! </p>
+        <p>
+          Antes de empezar a cocinar, asegúrate de tener todos los ingredientes y utensilios necesarios a mano para
+          evitar errores y desperdiciar tiempo.
+        </p>
       </div>
     </div>
 
     <div class="mt-10">
-      <h2 class="text-xl font-semibold text-slate-800">Categorias</h2>
+      <h2 class="subtitle-text">Categorias</h2>
       <ion-segment color="light" [value]="selectedCategory" (ionChange)="filterCategory($event)" mode="ios"
         class="flex mt-6 flex-wrap justify-center gap-2 items-center w-full">
         <ion-segment-button *ngFor="let category of recipesCategories" value={{category.attributes.categoria}}>
@@ -34,7 +36,7 @@
     </div>
 
     <!-- Recetas -->
-    <div class="grid grid-cols-2 gap-3 mt-12">
+    <div class="grid grid-cols-2 gap-3 my-12">
       <ion-card mode="ios" class="m-0 border border-slate-300 relative" [routerLink]="['/tabs/receta/' + recipe.id]"
         *ngFor="let recipe of recipes | filter:textSearch: 'nombre'">
         <img alt="Silhouette of mountains" class="h-24 object-cover w-full"
@@ -59,5 +61,29 @@
       <p class="text-center mt-4 text-slate-500">No se encontraron resultados.</p>
     </div>
 
+    <!-- Recetas Favoritos -->
+
+    <div class="mb-8" *ngIf="favoriteRecipes?.length > 0">
+      <h2 class="subtitle-text">Favoritos</h2>
+      <div class="grid grid-cols-2 gap-3 mt-4">
+        <ion-card mode="ios" class="m-0 border border-slate-300 relative" [routerLink]="['/tabs/receta/' + recipe.id]"
+          *ngFor="let recipe of favoriteRecipes | filter:textSearch: 'nombre'">
+          <img alt="Silhouette of mountains" class="h-24 object-cover w-full"
+            src="https://images.unsplash.com/photo-1682687221073-53ad74c2cad7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60" />
+          <ion-card-header class="p-2">
+            <ion-card-title class="text-xs text-slate-800">{{recipe.attributes.nombre}}</ion-card-title>
+            <ion-card-subtitle
+              class="text-[10px] mt-2">{{recipe.attributes.categorias_receta.data?.attributes?.categoria
+              || 'Sin categoria'}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <div class="px-2 pb-3 bottom-0">
+            <ion-card-content class="text-xs p-0 m-0 line-clamp-2">
+              {{recipe.attributes.descripcion}}
+            </ion-card-content>
+          </div>
+        </ion-card>
+      </div>
+    </div>
   </div>
 </ion-content>

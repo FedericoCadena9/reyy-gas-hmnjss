@@ -1,0 +1,190 @@
+<ion-content>
+    <div class="mx-5">
+        <div class="flex items-center justify-between">
+            <ion-buttons>
+                <ion-back-button defaultHref="tabs/home">
+                </ion-back-button>
+            </ion-buttons>
+            <p class="flex-1 text-center font-semibold uppercase text-pink-500">Profile</p>
+            <ion-buttons class="invisible">
+                <ion-back-button defaultHref="tabs/home">
+                </ion-back-button>
+            </ion-buttons>
+        </div>
+
+        <!-- Loader Skeleton -->
+        <ion-list *ngIf="!loaded">
+            <ion-thumbnail class="relative h-24 flex w-full items-center justify-center" slot="start">
+                <ion-skeleton-text class="rounded-full w-24 h-24" [animated]="true"></ion-skeleton-text>
+            </ion-thumbnail>
+
+            <div class="my-6 flex flex-col items-center justify-center">
+                <h2>
+                    <ion-skeleton-text [animated]="true" class="w-40 h-6"></ion-skeleton-text>
+                </h2>
+                <div class="space-y-2 w-full mt-6">
+                    <p>
+                        <ion-skeleton-text [animated]="true" class="w-full h-12"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text [animated]="true" class="w-full h-12"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text [animated]="true" class="w-full h-12"></ion-skeleton-text>
+                    </p>
+                </div>
+            </div>
+        </ion-list>
+
+        <div *ngIf="loaded && userInfo">
+            <div class="relative"
+                (click)="presentToast('bottom', '¡Ésta función no se encuentra disopnible en la beta!')">
+                <div class="flex items-center justify-center">
+                    <div
+                        class="mt-10 w-24 h-24 rounded-full border-2 border-dashed border-purple-600 flex items-center justify-center bg-slate-200 text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8">
+                            <path
+                                d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="w-full bottom-6 relative flex items-center justify-center">
+                    <div
+                        class="w-10 h-10 border-white border-2 flex items-center justify-center bg-slate-900 text-white rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path d="M12 9a3.75 3.75 0 100 7.5A3.75 3.75 0 0012 9z" />
+                            <path fill-rule="evenodd"
+                                d="M9.344 3.071a49.52 49.52 0 015.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 01-3 3h-15a3 3 0 01-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 001.11-.71l.822-1.315a2.942 2.942 0 012.332-1.39zM6.75 12.75a5.25 5.25 0 1110.5 0 5.25 5.25 0 01-10.5 0zm12-1.5a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center flex-col mt-2">
+                <p class="text-lg text-slate-800 font-semibold">
+                    {{ userInfo.username }}
+                </p>
+                <span class="bg-green-100 text-green-500 rounded-md px-4 mt-2 py-2 font-medium text-xs"
+                    *ngIf="userInfo.confirmed">
+                    Verificado
+                </span>
+            </div>
+
+            <form class="mt-12 mb-6" [formGroup]="userForm">
+                <h3 class="subtitle-text my-2">Información personal</h3>
+                <div>
+                    <div>
+                        <ion-input type="email" placeholder="Correo Electrónico"
+                            class="bg-white border border-slate-200 placeholder-slate-400 rounded-md"
+                            formControlName="email">
+                        </ion-input>
+                        <span class="span-error" *ngIf="isSubmitted && errorControl.email.errors?.required">
+                            El correo es requerido.
+                        </span>
+                        <span class="span-error" *ngIf="isSubmitted && errorControl.email.errors?.email">
+                            Ingrese un correo electrónico válido.
+                        </span>
+                    </div>
+
+                    <div class="my-6 space-y-2">
+                        <div>
+                            <ion-input type="text" placeholder="Nombre(s)"
+                                class="bg-white border border-slate-200 placeholder-slate-400 rounded-md"
+                                formControlName="nombres">
+                            </ion-input>
+                            <span class="span-error" *ngIf="isSubmitted && errorControl.nombres.errors?.required">
+                                El nombre es requerido.
+                            </span>
+                        </div>
+                        <div>
+                            <ion-input type="text" placeholder="Apellido Paterno"
+                                class="bg-white border border-slate-200 placeholder-slate-400 rounded-md"
+                                formControlName="apellidoPaterno">
+                            </ion-input>
+                            <span class="span-error"
+                                *ngIf="isSubmitted && errorControl.apellidoPaterno.errors?.required">
+                                El Apellido paterno es requerido.
+                            </span>
+                        </div>
+                        <div>
+                            <ion-input type="text" placeholder="Apellido Materno"
+                                class="bg-white border border-slate-200 placeholder-slate-400 rounded-md"
+                                formControlName="apellidoMaterno">
+                            </ion-input>
+                            <span class="span-error"
+                                *ngIf="isSubmitted && errorControl.apellidoMaterno.errors?.required">
+                                El Apellido materno es requerido.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary w-full mb-6" (click)="onSumbit()">
+                    <ion-spinner name="dots" color="light" *ngIf="isLoading"></ion-spinner>
+                    <span *ngIf="!isLoading">
+                        Actualizar perfil
+                    </span>
+                </button>
+
+                <h3 class="subtitle-text my-2">Contraseña</h3>
+                <div class="space-y-2 mb-6">
+                    <div>
+                        <div class="relative">
+                            <ion-input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Contraseña actual"
+                                formControlName="currentPassword"
+                                class="bg-white border border-slate-200 placeholder-slate-400 rounded-md w-full"></ion-input>
+                            <ion-icon class="absolute right-0 top-1.5 my-2 mx-3 z-10 w-5 h-5 text-slate-500"
+                                name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end"
+                                (click)="togglePasswordVisibility()"></ion-icon>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="relative">
+                            <ion-input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Contraseña nueva"
+                                formControlName="password"
+                                class="bg-white border border-slate-200 placeholder-slate-400 rounded-md w-full"></ion-input>
+                            <ion-icon class="absolute right-0 top-1.5 my-2 mx-3 z-10 w-5 h-5 text-slate-500"
+                                name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end"
+                                (click)="togglePasswordVisibility()"></ion-icon>
+                        </div>
+                        <span class="text-xs text-slate-400">
+                            La contraseña debe tener al menos 8 caracteres.
+                        </span>
+                    </div>
+                    <div>
+                        <div class="relative">
+                            <ion-input type="{{ showPassword ? 'text' : 'password' }}" placeholder="Repetir contraseña"
+                                formControlName="passwordConfirmation"
+                                class="bg-white border border-slate-200 placeholder-slate-400 rounded-md w-full"></ion-input>
+                            <ion-icon class="absolute right-0 top-1.5 my-2 mx-3 z-10 w-5 h-5 text-slate-500"
+                                name="{{ showPassword ? 'eye-off' : 'eye' }}" slot="end"
+                                (click)="togglePasswordVisibility()"></ion-icon>
+                        </div>
+                        <span class="text-xs text-slate-400">
+                            La contraseña debe tener al menos 8 caracteres.
+                        </span>
+                        <span class="span-error"
+                            *ngIf="userForm.controls.passwordConfirmation.touched && userForm.hasError('mismatchedPasswords') && userForm.controls.password.valid">
+                            Las contraseñas no coinciden.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="btn-secondary w-full" (click)="onChangePassword()">
+                    <ion-spinner name="dots" color="light" *ngIf="isLoading"></ion-spinner>
+                    <span *ngIf="!isLoading">
+                        Actualizar contraseña
+                    </span>
+                </div>
+
+                <h3 class="subtitle-text my-2 mt-8">Zona de riesgo</h3>
+                <div class="btn-delete w-full" (click)="presentAlert()">
+                    <ion-spinner name="dots" color="light" *ngIf="isLoading"></ion-spinner>
+                    <span *ngIf="!isLoading">
+                        Eliminar cuenta
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</ion-content>

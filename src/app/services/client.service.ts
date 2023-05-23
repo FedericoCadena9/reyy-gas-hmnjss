@@ -10,12 +10,18 @@ export class ClientService {
   constructor(private http: HttpClient) {}
 
   // Función para obtener los precios de Gas Lp
-  getGasPrices() {
-    return this.http.get('assets/db/gasPrice.json').pipe(
-      map((res: any) => {
-        return res.data;
+  getGasPrices(token: string) {
+    return this.http
+      .get(`${environment.api_url}/precio-gas`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   // Función para obtener los números de los operadores
@@ -25,6 +31,21 @@ export class ClientService {
         return res.data;
       })
     );
+  }
+
+  //Función para obtener los operadores
+  getOperadores(token: string) {
+    return this.http
+      .get(`${environment.api_url}/operadores`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   //Función para obtener los tips
@@ -74,10 +95,27 @@ export class ClientService {
 
   //Función para obtener una receta por id
   getRecipe(id: string) {
-    return this.http.get(`${environment.api_url}/recetas/${id}?populate=*`).pipe(
-      map((res: any) => {
-        return res.data;
+    return this.http
+      .get(`${environment.api_url}/recetas/${id}?populate=*`)
+      .pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
+  }
+
+  //Función para obtener los articulos
+  getProducts(token: string) {
+    return this.http
+      .get(`${environment.api_url}/articulos`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-    );
+      .pipe(
+        map((res: any) => {
+          return res.data;
+        })
+      );
   }
 }
